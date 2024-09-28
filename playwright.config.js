@@ -23,7 +23,7 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   // Run tests with the maximum available parallel workers for full parallelism
-  workers: process.env.CI ? 'auto' : undefined, // 'auto' lets Playwright decide based on CPU cores
+  workers: process.env.CI ? 'auto' : 'auto', // 'auto' lets Playwright decide based on CPU cores
 
   // HTML report for local runs, but can switch to 'junit' for CI
   reporter: process.env.CI ? 'junit' : 'html',
