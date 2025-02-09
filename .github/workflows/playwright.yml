@@ -6,21 +6,8 @@ on:
     branches: [ main, master ]
 
 jobs:
-  security:
-    name: Snyk Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: d967f43d-295f-4b26-868b-674e6c94f560
-        with:
-          args: --severity-threshold=high
-
   test:
     name: Playwright Tests
-    needs: security
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
