@@ -1,0 +1,12 @@
+{
+    "users": {
+        "standard": {
+            "username": "tomsmith",
+            "password": "SuperSecretPassword!"
+        },
+        "admin": {
+            "username": "admin",
+            "password": "admin123"
+        }
+    }
+}

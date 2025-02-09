@@ -1,14 +1,55 @@
 {
-  "name": "playwright",
+  "name": "playwright-herokuapp",
   "version": "1.0.0",
+  "description": "Automated testing suite for The Internet Herokuapp using Playwright",
   "main": "index.js",
-  "scripts": {},
-  "keywords": [],
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen",
+    "test:single": "playwright test -g",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:safari": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project=\"Mobile Android\" --project=\"Mobile iOS\"",
+    "test:e2e": "playwright test tests/e2e/",
+    "test:api": "playwright test tests/api/",
+    "test:visual": "playwright test tests/visual/",
+    "test:perf": "playwright test tests/performance/",
+    "test:a11y": "playwright test tests/accessibility/",
+    "test:components": "playwright test tests/components/",
+    "test:dev": "cross-env TEST_ENV=dev playwright test",
+    "test:staging": "cross-env TEST_ENV=staging playwright test",
+    "test:prod": "cross-env TEST_ENV=prod playwright test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "update:snapshots": "playwright test --update-snapshots",
+    "test:cucumber": "cucumber-js",
+    "test:cucumber:tags": "cucumber-js --tags"
+  },
+  "keywords": [
+    "testing",
+    "automation",
+    "playwright",
+    "e2e",
+    "herokuapp"
+  ],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "dependencies": {
+    "@playwright/test": "^1.41.1",
+    "dotenv": "^16.3.1"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.47.2",
-    "@types/node": "^20.14.2"
+    "@axe-core/playwright": "^4.8.5",
+    "@cucumber/cucumber": "^10.3.1",
+    "@cucumber/pretty-formatter": "^1.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.4"
   }
 }

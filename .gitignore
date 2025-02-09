@@ -3,3 +3,14 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.env
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+/screenshots/
+/videos/
+/allure-results/
+/allure-report/
