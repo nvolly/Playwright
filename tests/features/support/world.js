@@ -1,18 +1,25 @@
-const { setWorldConstructor, World } = require('@cucumber/cucumber');
-const { chromium } = require('@playwright/test');
-const { config } = require('../../fixtures/config');
+const { setWorldConstructor, World } = require('@cucumber/cucumber') 
+const { chromium } = require('@playwright/test') 
+const { config } = require('../../fixtures/config') 
 
 class CustomWorld extends World {
     async setup() {
-        this.browser = await chromium.launch({ headless: false });
-        this.context = await this.browser.newContext();
-        this.page = await this.context.newPage();
-        await this.page.goto(config.baseUrl);
+        const browser = await chromium.launch({ 
+            headless: false,
+            slowMo: 100
+        }) 
+        const context = await browser.newContext() 
+        this.page = await context.newPage() 
+        this.browser = browser 
+        this.context = context 
+        await this.page.goto(config.baseUrl) 
     }
 
     async teardown() {
-        await this.browser.close();
+        if (this.browser) {
+            await this.browser.close() 
+        }
     }
 }
 
-setWorldConstructor(CustomWorld);
+setWorldConstructor(CustomWorld) 

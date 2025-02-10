@@ -1,8 +1,5 @@
-const { expect } = require('@playwright/test');
+const { expect } = require('@playwright/test') 
 
-/**
- * Helper functions for tests
- */
 class TestHelper {
     /**
      * Wait for element to be visible and click
@@ -10,8 +7,8 @@ class TestHelper {
      * @param {string} selector 
      */
     static async clickWhenVisible(page, selector) {
-        await page.waitForSelector(selector, { state: 'visible' });
-        await page.click(selector);
+        await page.waitForSelector(selector, { state: 'visible' }) 
+        await page.click(selector) 
     }
 
     /**
@@ -21,8 +18,8 @@ class TestHelper {
      * @param {string} value 
      */
     static async fillWhenVisible(page, selector, value) {
-        await page.waitForSelector(selector, { state: 'visible' });
-        await page.fill(selector, value);
+        await page.waitForSelector(selector, { state: 'visible' }) 
+        await page.fill(selector, value) 
     }
 
     /**
@@ -32,9 +29,9 @@ class TestHelper {
      * @param {string} expectedText 
      */
     static async assertText(page, selector, expectedText) {
-        const element = await page.waitForSelector(selector);
-        const text = await element.textContent();
-        expect(text?.trim()).toBe(expectedText);
+        const element = await page.waitForSelector(selector) 
+        const text = await element.textContent() 
+        expect(text?.trim()).toBe(expectedText) 
     }
 
     /**
@@ -43,9 +40,9 @@ class TestHelper {
      * @param {string} name 
      */
     static async takeScreenshot(page, name) {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        await page.screenshot({ path: `./test-results/screenshots/${name}-${timestamp}.png` });
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-') 
+        await page.screenshot({ path: `./test-results/screenshots/${name}-${timestamp}.png` }) 
     }
 }
 
-module.exports = TestHelper;
+module.exports = TestHelper 

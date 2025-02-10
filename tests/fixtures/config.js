@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config() 
 
 const defaultConfig = {
     baseUrl: process.env.BASE_URL || 'https://the-internet.herokuapp.com',
@@ -17,8 +17,8 @@ const defaultConfig = {
             password: process.env.ADMIN_PASS || 'admin123'
         }
     }
-};
+} 
 
 module.exports = {
     config: defaultConfig
-};
+} 

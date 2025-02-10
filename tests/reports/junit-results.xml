@@ -1,154 +1,404 @@
-<testsuites id="" name="" tests="2" failures="1" skipped="0" errors="0" time="9.019669">
-<testsuite name="accessibility\a11y.spec.js" timestamp="2025-02-09T14:56:55.779Z" hostname="chromium" tests="2" failures="1" skipped="0" time="13.199" errors="0">
-<testcase name="Accessibility Tests › should pass accessibility scan on login page" classname="accessibility\a11y.spec.js" time="6.818">
-<failure message="a11y.spec.js:5:5 should pass accessibility scan on login page" type="FAILURE">
-<![CDATA[  [chromium] › accessibility\a11y.spec.js:5:5 › Accessibility Tests › should pass accessibility scan on login page 
+<testsuites id="" name="" tests="10" failures="6" skipped="0" errors="0" time="58.02300199999998">
+<testsuite name="e2e\auth\login.spec.js" timestamp="2025-02-10T22:46:13.104Z" hostname="chromium" tests="2" failures="1" skipped="0" time="9.246" errors="0">
+<testcase name="Login Functionality › should login successfully with valid credentials" classname="e2e\auth\login.spec.js" time="4.694">
+<failure message="login.spec.js:13:5 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [chromium] › e2e\auth\login.spec.js:13:5 › Login Functionality › should login successfully with valid credentials 
 
-    Error: expect(received).toEqual(expected) // deep equality
+    Error: expect(received).toContain(expected) // indexOf
 
-    - Expected  -  1
-    + Received  + 91
+    Expected substring: "You logged in successfully"
+    Received string:    "
+                You logged into a secure area!
+                ×
+              "
 
-    - Array []
-    + Array [
-    +   Object {
-    +     "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-    +     "help": "Elements must meet minimum color contrast ratio thresholds",
-    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
-    +     "id": "color-contrast",
-    +     "impact": "serious",
-    +     "nodes": Array [
-    +       Object {
-    +         "all": Array [],
-    +         "any": Array [
-    +           Object {
-    +             "data": Object {
-    +               "bgColor": "#2ba6cb",
-    +               "contrastRatio": 2.83,
-    +               "expectedContrastRatio": "3:1",
-    +               "fgColor": "#ffffff",
-    +               "fontSize": "24.0pt (32px)",
-    +               "fontWeight": "normal",
-    +               "messageKey": null,
-    +             },
-    +             "id": "color-contrast",
-    +             "impact": "serious",
-    +             "message": "Element has insufficient color contrast of 2.83 (foreground color: #ffffff, background color: #2ba6cb, font size: 24.0pt (32px), font weight: normal). Expected contrast ratio of 3:1",
-    +             "relatedNodes": Array [
-    +               Object {
-    +                 "html": "<button class=\"radius\" type=\"submit\"><i class=\"fa fa-2x fa-sign-in\"> Login</i></button>",
-    +                 "target": Array [
-    +                   "button",
-    +                 ],
-    +               },
-    +             ],
-    +           },
-    +         ],
-    +         "failureSummary": "Fix any of the following:
-    +   Element has insufficient color contrast of 2.83 (foreground color: #ffffff, background color: #2ba6cb, font size: 24.0pt (32px), font weight: normal). Expected contrast ratio of 3:1",
-    +         "html": "<i class=\"fa fa-2x fa-sign-in\"> Login</i>",
-    +         "impact": "serious",
-    +         "none": Array [],
-    +         "target": Array [
-    +           "i",
-    +         ],
-    +       },
-    +       Object {
-    +         "all": Array [],
-    +         "any": Array [
-    +           Object {
-    +             "data": Object {
-    +               "bgColor": "#ffffff",
-    +               "contrastRatio": 2.83,
-    +               "expectedContrastRatio": "4.5:1",
-    +               "fgColor": "#2ba6cb",
-    +               "fontSize": "12.0pt (16px)",
-    +               "fontWeight": "normal",
-    +               "messageKey": null,
-    +             },
-    +             "id": "color-contrast",
-    +             "impact": "serious",
-    +             "message": "Element has insufficient color contrast of 2.83 (foreground color: #2ba6cb, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1",
-    +             "relatedNodes": Array [
-    +               Object {
-    +                 "html": "<body>",
-    +                 "target": Array [
-    +                   "body",
-    +                 ],
-    +               },
-    +             ],
-    +           },
-    +         ],
-    +         "failureSummary": "Fix any of the following:
-    +   Element has insufficient color contrast of 2.83 (foreground color: #2ba6cb, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1",
-    +         "html": "<a target=\"_blank\" href=\"http://elementalselenium.com/\">Elemental Selenium</a>",
-    +         "impact": "serious",
-    +         "none": Array [],
-    +         "target": Array [
-    +           "a[target=\"_blank\"]",
-    +         ],
-    +       },
-    +     ],
-    +     "tags": Array [
-    +       "cat.color",
-    +       "wcag2aa",
-    +       "wcag143",
-    +       "TTv5",
-    +       "TT13.c",
-    +       "EN-301-549",
-    +       "EN-9.1.4.3",
-    +       "ACT",
-    +     ],
-    +   },
-    + ]
+      14 |         await loginPage.login(config.users.standard.username, config.users.standard.password) 
+      15 |         const message = await loginPage.getSuccessMessage() 
+    > 16 |         expect(message).toContain('You logged in successfully') 
+         |                         ^
+      17 |     }) 
+      18 |
+      19 |     test('should show error with invalid credentials', async () => {
 
-      10 |             .analyze();
-      11 |
-    > 12 |         expect(accessibilityScanResults.violations).toEqual([]);
-         |                                                     ^
-      13 |     });
-      14 |
-      15 |     test('form inputs should have proper labels', async ({ page }) => {
-
-        at C:\Playwright\tests\accessibility\a11y.spec.js:12:53
+        at C:\Playwright\tests\e2e\auth\login.spec.js:16:25
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\test-failed-1.png
+    test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\video.webm
+    test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
-    test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\video-1.webm
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-
-    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
-    test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\trace.zip
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\trace.zip
     Usage:
 
-        npx playwright show-trace test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\trace.zip
+        npx playwright show-trace test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
 <![CDATA[
-[[ATTACHMENT|..\..\test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\test-failed-1.png]]
+[[ATTACHMENT|..\..\test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\test-failed-1.png]]
 
-[[ATTACHMENT|..\..\test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\video.webm]]
+[[ATTACHMENT|..\..\test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\video.webm]]
 
-[[ATTACHMENT|..\..\test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\video-1.webm]]
-
-[[ATTACHMENT|..\..\test-results\accessibility-a11y-Accessi-04476-sibility-scan-on-login-page-chromium\trace.zip]]
+[[ATTACHMENT|..\..\test-results\e2e-auth-login-Login-Funct-63073-ully-with-valid-credentials-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="Accessibility Tests › form inputs should have proper labels" classname="accessibility\a11y.spec.js" time="6.381">
+<testcase name="Login Functionality › should show error with invalid credentials" classname="e2e\auth\login.spec.js" time="4.552">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|..\..\test-results\accessibility-a11y-Accessi-44d73-s-should-have-proper-labels-chromium\trace.zip]]
+[[ATTACHMENT|..\..\test-results\e2e-auth-login-Login-Funct-03bc3-or-with-invalid-credentials-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="e2e\auth.spec.js" timestamp="2025-02-10T22:46:13.104Z" hostname="chromium" tests="2" failures="1" skipped="0" time="8.197" errors="0">
+<testcase name="Authentication › should login successfully with valid credentials" classname="e2e\auth.spec.js" time="4.494">
+<failure message="auth.spec.js:13:5 should login successfully with valid credentials" type="FAILURE">
+<![CDATA[  [chromium] › e2e\auth.spec.js:13:5 › Authentication › should login successfully with valid credentials 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "You logged in successfully"
+    Received string:    "
+                You logged into a secure area!
+                ×
+              "
+
+      14 |         await loginPage.login(config.users.standard.username, config.users.standard.password) 
+      15 |         const message = await loginPage.getSuccessMessage() 
+    > 16 |         expect(message).toContain('You logged in successfully') 
+         |                         ^
+      17 |     }) 
+      18 |
+      19 |     test('should show error with invalid credentials', async () => {
+
+        at C:\Playwright\tests\e2e\auth.spec.js:16:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\..\test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\video.webm]]
+
+[[ATTACHMENT|..\..\test-results\e2e-auth-Authentication-sh-816a1-ully-with-valid-credentials-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Authentication › should show error with invalid credentials" classname="e2e\auth.spec.js" time="3.703">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-auth-Authentication-sh-e230b-or-with-invalid-credentials-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="e2e\herokuapp.spec.js" timestamp="2025-02-10T22:46:13.104Z" hostname="chromium" tests="4" failures="2" skipped="0" time="39.749" errors="0">
+<testcase name="The Internet Herokuapp Tests › Login Test" classname="e2e\herokuapp.spec.js" time="9.911">
+<failure message="herokuapp.spec.js:5:5 Login Test" type="FAILURE">
+<![CDATA[  [chromium] › e2e\herokuapp.spec.js:5:5 › The Internet Herokuapp Tests › Login Test ───────────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toContainText(expected)
+
+    Locator: locator('.flash.success')
+    - Expected string  - 1
+    + Received string  + 4
+
+    - You logged in successfully!
+    +
+    +             You logged into a secure area!
+    +             ×
+    +           
+    Call log:
+      - expect.toContainText with timeout 5000ms
+      - waiting for locator('.flash.success')
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+      -   locator resolved to <div id="flash" data-alert="" class="flash success">…</div>
+      -   unexpected value "
+                You logged into a secure area!
+                ×
+              "
+
+
+      11 |         
+      12 |         await expect(page.locator('.flash.success')).toBeVisible() 
+    > 13 |         await expect(page.locator('.flash.success')).toContainText('You logged in successfully!') 
+         |                                                      ^
+      14 |     }) 
+      15 |
+      16 |     test('Dynamic Loading Test', async ({ page }) => {
+
+        at C:\Playwright\tests\e2e\herokuapp.spec.js:13:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\video.webm]]
+
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-Herokuapp-Tests-Login-Test-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="The Internet Herokuapp Tests › Dynamic Loading Test" classname="e2e\herokuapp.spec.js" time="8.516">
+<failure message="herokuapp.spec.js:16:5 Dynamic Loading Test" type="FAILURE">
+<![CDATA[  [chromium] › e2e\herokuapp.spec.js:16:5 › The Internet Herokuapp Tests › Dynamic Loading Test ────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: locator('#finish h4')
+    Expected: visible
+    Received: hidden
+    Call log:
+      - expect.toBeVisible with timeout 5000ms
+      - waiting for locator('#finish h4')
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+      -   locator resolved to <h4>Hello World!</h4>
+      -   unexpected value "hidden"
+
+
+      19 |         await page.click('button') 
+      20 |         await expect(page.locator('#loading')).toBeVisible() 
+    > 21 |         await expect(page.locator('#finish h4')).toBeVisible() 
+         |                                                  ^
+      22 |         await expect(page.locator('#finish h4')).toHaveText('Hello World!') 
+      23 |     }) 
+      24 |
+
+        at C:\Playwright\tests\e2e\herokuapp.spec.js:21:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\video.webm]]
+
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-cbafc--Tests-Dynamic-Loading-Test-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="The Internet Herokuapp Tests › Drag and Drop Test" classname="e2e\herokuapp.spec.js" time="2.375">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-f713e-pp-Tests-Drag-and-Drop-Test-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="The Internet Herokuapp Tests › Dynamic Controls Test" classname="e2e\herokuapp.spec.js" time="18.947">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-herokuapp-The-Internet-7e0f2-Tests-Dynamic-Controls-Test-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="e2e\sample.spec.js" timestamp="2025-02-10T22:46:13.104Z" hostname="chromium" tests="2" failures="2" skipped="0" time="38.561" errors="0">
+<testcase name="Sample Test Suite › should demonstrate a basic test" classname="e2e\sample.spec.js" time="35.853">
+<failure message="sample.spec.js:10:5 should demonstrate a basic test" type="FAILURE">
+<![CDATA[  [chromium] › e2e\sample.spec.js:10:5 › Sample Test Suite › should demonstrate a basic test ───────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.waitForSelector: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#search') to be visible
+
+
+       at utils\test-helper.js:21
+
+      19 |      */
+      20 |     static async fillWhenVisible(page, selector, value) {
+    > 21 |         await page.waitForSelector(selector, { state: 'visible' }) 
+         |                    ^
+      22 |         await page.fill(selector, value) 
+      23 |     }
+      24 |
+
+        at Function.fillWhenVisible (C:\Playwright\tests\utils\test-helper.js:21:20)
+        at C:\Playwright\tests\e2e\sample.spec.js:12:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\..\test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\video.webm]]
+
+[[ATTACHMENT|..\..\test-results\e2e-sample-Sample-Test-Suite-should-demonstrate-a-basic-test-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Sample Test Suite › should demonstrate test with custom viewport" classname="e2e\sample.spec.js" time="2.708">
+<failure message="sample.spec.js:19:5 should demonstrate test with custom viewport" type="FAILURE">
+<![CDATA[  [chromium] › e2e\sample.spec.js:19:5 › Sample Test Suite › should demonstrate test with custom viewport 
+
+    Error: Playwright Test did not expect test.use() to be called here.
+    Most common reasons include:
+    - You are calling test.use() in a configuration file.
+    - You are calling test.use() in a file that is imported by the configuration file.
+    - You have two different versions of @playwright/test. This usually happens
+      when one of the dependencies in your package.json depends on @playwright/test.
+
+      19 |     test('should demonstrate test with custom viewport', async ({ page }) => {
+      20 |         // Example of setting a custom viewport for a specific test
+    > 21 |         test.use({ viewport: { width: 1920, height: 1080 } }) 
+         |              ^
+      22 |         
+      23 |         await page.goto('/responsive-page') 
+      24 |         const element = await page.waitForSelector('.desktop-only') 
+
+        at C:\Playwright\tests\e2e\sample.spec.js:21:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\..\test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|..\..\test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\video.webm]]
+
+[[ATTACHMENT|..\..\test-results\e2e-sample-Sample-Test-Sui-c6cab-e-test-with-custom-viewport-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>
